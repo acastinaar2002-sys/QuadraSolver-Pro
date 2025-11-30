@@ -1,0 +1,5 @@
+{
+  "name": "QuadraSolver Pro",
+  "description": "A premium quadratic equation simulator and educational tool inspired by Apple design principles. Solves complete and incomplete equations, graphs functions, and generates PDF reports.",
+  "requestFramePermissions": []
+}
