@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { QuadraticResult, GraphPoint, QuadraticParams } from '../types';
+import { QuadraticResult, QuadraticParams } from '../types';
 import { Card, Badge } from './UIComponents';
 import { generateGraphData, formatEquation } from '../services/mathUtils';
 

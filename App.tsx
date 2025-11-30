@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, InputGroup, Badge } from './components/UIComponents';
 import { ResultsView } from './components/ResultsView';
 import { solveQuadratic, formatEquation } from './services/mathUtils';
@@ -20,11 +20,7 @@ const App: React.FC = () => {
   const [result, setResult] = useState<QuadraticResult>(solveQuadratic(params));
   const [explanation, setExplanation] = useState<string>("");
   const [isExplaining, setIsExplaining] = useState(false);
-  const [activeTab, setActiveTab] = useState<'solver' | 'report'>('solver');
   
-  // Ref for the content we want to capture in PDF
-  const reportRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     setResult(solveQuadratic(params));
     setExplanation(""); // Clear explanation on parameter change
