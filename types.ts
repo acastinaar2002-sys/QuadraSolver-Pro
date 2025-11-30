@@ -22,10 +22,14 @@ declare global {
   }
 }
 
-// Extend the NodeJS namespace to include API_KEY in ProcessEnv
-// This merges with the existing definition in @types/node
-declare namespace NodeJS {
-  interface ProcessEnv {
-    API_KEY: string;
+// Ensure process.env is typed correctly for the client-side code
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      API_KEY: string;
+      [key: string]: string | undefined;
+    }
   }
 }
+
+export {};
