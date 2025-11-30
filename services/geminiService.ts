@@ -3,18 +3,12 @@ import { QuadraticParams } from "../types";
 
 export const getGeminiExplanation = async (params: QuadraticParams): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      throw new Error("API Key not found");
-    }
-
-    const ai = new GoogleGenAI({ apiKey });
+    // Initialize GoogleGenAI with the API key from process.env directly
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
-    const prompt = `
+    const systemInstruction = `
       Actúa como un profesor de matemáticas experto y paciente.
-      Explica paso a paso cómo resolver la siguiente ecuación de segundo grado en Español:
-      
-      Ecuación: ${params.a}x² + ${params.b}x + ${params.c} = 0
+      Explica paso a paso cómo resolver la siguiente ecuación de segundo grado en Español.
 
       Reglas:
       1. Identifica primero el tipo de ecuación (Completa, Incompleta falta b, Incompleta falta c).
@@ -28,9 +22,14 @@ export const getGeminiExplanation = async (params: QuadraticParams): Promise<str
       Sé conciso pero didáctico, como los ejemplos de un libro de texto.
     `;
 
+    const prompt = `Ecuación: ${params.a}x² + ${params.b}x + ${params.c} = 0`;
+
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-pro-preview', // Using gemini-3-pro-preview for math tasks as recommended
       contents: prompt,
+      config: {
+        systemInstruction: systemInstruction,
+      },
     });
 
     return response.text || "No se pudo generar la explicación.";
