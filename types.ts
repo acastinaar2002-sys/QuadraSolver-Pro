@@ -16,15 +16,16 @@ export interface GraphPoint {
   y: number;
 }
 
-// For jsPDF global access and process.env used by Gemini SDK
 declare global {
   interface Window {
     jspdf: any;
   }
-  // Extend NodeJS ProcessEnv to include API_KEY without redeclaring 'process'
-  namespace NodeJS {
-    interface ProcessEnv {
-      API_KEY: string;
-    }
+}
+
+// Extend the NodeJS namespace to include API_KEY in ProcessEnv
+// This merges with the existing definition in @types/node
+declare namespace NodeJS {
+  interface ProcessEnv {
+    API_KEY: string;
   }
 }
